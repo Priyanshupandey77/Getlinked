@@ -25,3 +25,59 @@ export const getFeed = async (req, res) => {
 
   res.json(posts);
 };
+
+export const likePost = async (req, res) => {
+  const post = await Post.findById(req.params.id);
+
+  if (!post) {
+    return res.status(404).json({ msg: "Post not found" });
+  }
+
+  const alreadyLiked = post.likes.some(
+    (id) => id.toString() === req.user._id.toString(),
+  );
+
+  if (alreadyLiked) {
+    //unlike
+    post.likes = post.likes.filter(
+      (id) => id.toString() !== req.user._id.toString(),
+    );
+  } else {
+    //like
+    post.likes.push(req.user._id);
+  }
+  await post.save();
+
+  res.json({ msg: alreadyLiked ? "Post unliked" : "Post liked" });
+};
+
+export const commentOnPost = async (req, res) => {
+  const { text } = req.body;
+
+  const post = await Post.findById(req.params.id);
+
+  if (!post) {
+    return res.status(404).json({ msg: "Post not found" });
+  }
+
+  post.comments.push({
+    user: req.user._id,
+    text,
+  });
+  await post.save();
+
+  res.json(post);
+};
+
+export const deletePost = async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  if (!post) return res.status(404).json({ msg: "Post not found" });
+
+  if (post.author.toString() !== req.user._id.toString()) {
+    return res.status(403).json({ msg: "Not authorized" });
+  }
+
+  await post.deleteOne();
+
+  res.json({ msg: "Post deleted" });
+};
