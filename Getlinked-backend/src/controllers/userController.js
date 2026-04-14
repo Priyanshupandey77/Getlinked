@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import { createNotification } from "../utils/createNotification.js";
 
 export const getMyProfile = async (req, res) => {
   const user = await User.findById(req.user._id)
@@ -28,6 +29,11 @@ export const followUser = async (req, res) => {
 
   await currentUser.save();
   await userToFollow.save();
+  await createNotification({
+    recipient: userToFollow._id,
+    sender: currentUser._id,
+    type: "follow",
+  });
 
   res.json({ msg: "User followed" });
 };

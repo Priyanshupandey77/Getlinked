@@ -1,5 +1,6 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
+import { createNotification } from "../utils/createNotification.js";
 
 export const createPost = async (req, res) => {
   const { content } = req.body;
@@ -47,6 +48,12 @@ export const likePost = async (req, res) => {
     post.likes.push(req.user._id);
   }
   await post.save();
+  await createNotification({
+    recipient: post.author,
+    sender: req.user._id,
+    type: "like",
+    post: post._id,
+  });
 
   res.json({ msg: alreadyLiked ? "Post unliked" : "Post liked" });
 };
@@ -65,6 +72,12 @@ export const commentOnPost = async (req, res) => {
     text,
   });
   await post.save();
+  await createNotification({
+    recipient: post.author,
+    sender: req.user._id,
+    type: "comment",
+    post: post._id
+  });
 
   res.json(post);
 };
