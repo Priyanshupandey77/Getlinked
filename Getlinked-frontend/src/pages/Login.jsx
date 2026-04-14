@@ -1,7 +1,9 @@
 import { useState } from "react";
 import API from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -22,7 +24,8 @@ function Login() {
 
       localStorage.setItem("token", res.data.accessToken);
 
-      alert("Login success!!");
+    //   alert("Login success!!");
+      navigate("/feed");
     } catch (error) {
       console.log(error);
       alert("Login failed");
