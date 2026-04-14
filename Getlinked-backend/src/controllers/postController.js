@@ -16,13 +16,18 @@ export const createPost = async (req, res) => {
 export const getFeed = async (req, res) => {
   const user = await User.findById(req.user._id);
 
+  const page = parseInt(req.query.page) || 1;
+  const limit = 5;
+
   const posts = await Post.find({
     author: {
       $in: [...user.following, req.user._id],
     },
   })
     .populate("author", "name email")
-    .sort({ createdAt: -1 });
+    .sort({ createdAt: -1 })
+    .skip((page - 1) * limit)
+    .limit(limit);
 
   res.json(posts);
 };
@@ -76,7 +81,7 @@ export const commentOnPost = async (req, res) => {
     recipient: post.author,
     sender: req.user._id,
     type: "comment",
-    post: post._id
+    post: post._id,
   });
 
   res.json(post);

@@ -62,3 +62,13 @@ export const unfollowUser = async (req, res) => {
 
   res.json({ msg: "User unfollowed" });
 };
+
+export const searchUsers = async (req, res) => {
+  const keyword = req.query.q;
+
+  const users = await User.find({
+    name: { $regex: keyword, $options: "i" },
+  }).select("name email");
+
+  res.json(users);
+};

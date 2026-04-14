@@ -1,6 +1,6 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import jwt, { decode } from "jsonwebtoken";
 
 const generateAccessToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -86,5 +86,27 @@ export const login = async (req, res) => {
     res.json({ accessToken, user: userData });
   } catch (error) {
     return res.status(500).json({ msg: error.message });
+  }
+};
+
+export const refreshToken = (req, res) => {
+  const token = req.cookies.refreshToken;
+
+  if (!token) {
+    return res.status(401).json({ msg: "No refresh token" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+
+    const newAccessToken = jwt.sign(
+      { id: decoded.id },
+      process.env.JWT_SECRET,
+      { expiresIn: "15m" },
+    );
+
+    res.json({ accessToken: newAccessToken });
+  } catch (error) {
+    return res.status(403).json({ msg: "Invalid refresh token" });
   }
 };
