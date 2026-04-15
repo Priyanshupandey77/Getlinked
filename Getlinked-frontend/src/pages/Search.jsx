@@ -79,7 +79,7 @@ function Search() {
           {user.isFollowing ? (
             <button
               onClick={() => handleUnfollow(user._id)}
-              className="bg-gray-500 text-white px-3 py-1"
+              className="bg-gray-500 hover:bg-red-400 text-white px-3 py-1"
             >
               Following
             </button>
