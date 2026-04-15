@@ -1,10 +1,11 @@
-import Notification from "../models/Notification.js"
+import Notification from "../models/Notification.js";
 
 export const createNotification = async ({
   recipient,
   sender,
   type,
   post = null,
+  commentText = null,
 }) => {
   try {
     if (!recipient || !sender) return;
@@ -16,6 +17,7 @@ export const createNotification = async ({
       sender,
       type,
       post,
+      commentText,
     });
   } catch (err) {
     console.error("Notification error:", err.message);

@@ -82,6 +82,7 @@ export const commentOnPost = async (req, res) => {
     sender: req.user._id,
     type: "comment",
     post: post._id,
+    commentText: text,
   });
 
   res.json(post);

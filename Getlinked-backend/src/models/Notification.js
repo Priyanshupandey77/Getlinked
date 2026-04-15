@@ -22,6 +22,9 @@ const notificationSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    commentText: {
+      type: String,
+    },
   },
   { timestamps: true },
 );
