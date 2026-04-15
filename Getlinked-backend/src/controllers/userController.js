@@ -66,9 +66,16 @@ export const unfollowUser = async (req, res) => {
 export const searchUsers = async (req, res) => {
   const keyword = req.query.q;
 
+  const currentUser = await User.findById(req.user._id);
+
   const users = await User.find({
     name: { $regex: keyword, $options: "i" },
   }).select("name email");
 
-  res.json(users);
+  const result = users.map((user) => ({
+    ...user._doc,
+    isFollowing: currentUser.following.includes(user._id),
+  }));
+
+  res.json(result);
 };
