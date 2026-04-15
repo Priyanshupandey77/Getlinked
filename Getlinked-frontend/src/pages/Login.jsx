@@ -1,6 +1,6 @@
 import { useState } from "react";
 import API from "../api/axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ function Login() {
 
       localStorage.setItem("token", res.data.accessToken);
 
-    //   alert("Login success!!");
+      //   alert("Login success!!");
       navigate("/feed");
     } catch (error) {
       console.log(error);
@@ -57,6 +57,10 @@ function Login() {
         />
 
         <button className="w-full bg-blue-500 text-white p-2">Login</button>
+
+        <p>
+          Don't have an account?<Link to="/register">Signup</Link>
+        </p>
       </form>
     </div>
   );
