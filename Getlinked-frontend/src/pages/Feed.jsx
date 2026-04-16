@@ -20,7 +20,7 @@ function Feed() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-10">
+    <div className="min-h-screen bg-linear-to-br from-gray-100 to-gray-200 py-10">
       <div className="max-w-2xl mx-auto px-4 space-y-6">
 
         {/* Header */}
