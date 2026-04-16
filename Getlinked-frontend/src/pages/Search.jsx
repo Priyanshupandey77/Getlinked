@@ -22,15 +22,6 @@ function Search() {
     }
   };
 
-  //   const handleFollow = async (id) => {
-  //     try {
-  //       await API.post(`/users/follow/${id}`);
-  //       setUsers(users.filter((u) => u._id !== id));
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
   const handleFollow = async (id) => {
     try {
       await API.post(`/users/follow/${id}`);
