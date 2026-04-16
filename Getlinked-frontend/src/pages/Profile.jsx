@@ -20,22 +20,26 @@ function Profile() {
   if (!user) return <div className="text-center mt-10">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10">
-      <div className="max-w-3xl mx-auto px-4 space-y-6">
+    <div className="min-h-screen bg-gray-100 py-6 sm:py-10">
+      <div className="max-w-3xl mx-auto px-3 sm:px-4 space-y-4 sm:space-y-6">
         {/* Profile Card */}
-        <div className="bg-white rounded-2xl shadow-md p-6 flex items-center gap-5">
+        <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 flex items-center gap-3 sm:gap-5">
           {/* Avatar */}
-          <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center text-white text-xl font-bold">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg sm:text-xl font-bold shrink-0">
             {user.name.charAt(0).toUpperCase()}
           </div>
 
           {/* User Info */}
-          <div className="flex-1">
-            <h2 className="text-xl font-bold text-gray-800">{user.name}</h2>
-            <p className="text-gray-500 text-sm">{user.email}</p>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-800 truncate">
+              {user.name}
+            </h2>
+            <p className="text-gray-500 text-xs sm:text-sm truncate">
+              {user.email}
+            </p>
 
             {/* Stats */}
-            <div className="flex gap-6 mt-3 text-sm">
+            <div className="flex gap-4 sm:gap-6 mt-2 sm:mt-3 text-xs sm:text-sm flex-wrap">
               <span className="text-gray-700">
                 <strong>{user.followers.length}</strong> Followers
               </span>
@@ -47,23 +51,27 @@ function Profile() {
         </div>
 
         {/* Followers Section */}
-        <div className="bg-white rounded-2xl shadow-md p-5">
-          <h3 className="text-lg font-semibold mb-4 text-gray-800">
+        <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5">
+          <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800">
             Followers
           </h3>
 
           {user.followers.length === 0 ? (
-            <p className="text-gray-500 text-sm">No followers yet</p>
+            <p className="text-gray-500 text-xs sm:text-sm">No followers yet</p>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {user.followers.map((f) => (
                 <div
                   key={f._id}
-                  className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition"
+                  className="flex items-center justify-between p-2.5 sm:p-3 rounded-lg hover:bg-gray-50 transition"
                 >
-                  <div>
-                    <p className="font-medium text-gray-800">{f.name}</p>
-                    <p className="text-sm text-gray-500">{f.email}</p>
+                  <div className="min-w-0">
+                    <p className="font-medium text-gray-800 text-sm sm:text-base truncate">
+                      {f.name}
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-500 truncate">
+                      {f.email}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -72,23 +80,29 @@ function Profile() {
         </div>
 
         {/* Following Section */}
-        <div className="bg-white rounded-2xl shadow-md p-5">
-          <h3 className="text-lg font-semibold mb-4 text-gray-800">
+        <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5">
+          <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800">
             Following
           </h3>
 
           {user.following.length === 0 ? (
-            <p className="text-gray-500 text-sm">Not following anyone</p>
+            <p className="text-gray-500 text-xs sm:text-sm">
+              Not following anyone
+            </p>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {user.following.map((f) => (
                 <div
                   key={f._id}
-                  className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition"
+                  className="flex items-center justify-between p-2.5 sm:p-3 rounded-lg hover:bg-gray-50 transition"
                 >
-                  <div>
-                    <p className="font-medium text-gray-800">{f.name}</p>
-                    <p className="text-sm text-gray-500">{f.email}</p>
+                  <div className="min-w-0">
+                    <p className="font-medium text-gray-800 text-sm sm:text-base truncate">
+                      {f.name}
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-500 truncate">
+                      {f.email}
+                    </p>
                   </div>
                 </div>
               ))}

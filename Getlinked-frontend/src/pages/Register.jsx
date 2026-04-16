@@ -34,15 +34,15 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-100 to-green-300">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-green-100 to-green-300 px-3 sm:px-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-xl w-96 space-y-4"
+        className="bg-white p-5 sm:p-8 rounded-2xl shadow-xl w-full max-w-md space-y-4"
       >
-        <h2 className="text-2xl font-bold text-center text-gray-800">
+        <h2 className="text-xl sm:text-2xl font-bold text-center text-gray-800">
           Create Account
         </h2>
-        <p className="text-center text-gray-500 text-sm">
+        <p className="text-center text-gray-500 text-xs sm:text-sm">
           Join us and get started 🚀
         </p>
 
@@ -51,7 +51,7 @@ function Register() {
           name="name"
           placeholder="Full Name"
           onChange={handleChange}
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+          className="w-full p-2.5 sm:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition text-sm sm:text-base"
         />
 
         <input
@@ -59,7 +59,7 @@ function Register() {
           name="email"
           placeholder="Email Address"
           onChange={handleChange}
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+          className="w-full p-2.5 sm:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition text-sm sm:text-base"
         />
 
         <input
@@ -67,14 +67,14 @@ function Register() {
           name="password"
           placeholder="Password"
           onChange={handleChange}
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+          className="w-full p-2.5 sm:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition text-sm sm:text-base"
         />
 
-        <button className="w-full bg-green-500 hover:bg-green-600 text-white p-3 rounded-lg font-semibold transition duration-200">
+        <button className="w-full bg-green-500 hover:bg-green-600 text-white p-2.5 sm:p-3 rounded-lg font-semibold transition duration-200 text-sm sm:text-base">
           Register
         </button>
 
-        <p className="text-center text-sm text-gray-600">
+        <p className="text-center text-xs sm:text-sm text-gray-600">
           Already have an account?{" "}
           <Link to="/" className="text-green-600 font-medium hover:underline">
             Login
