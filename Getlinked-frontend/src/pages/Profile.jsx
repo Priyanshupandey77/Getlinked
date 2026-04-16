@@ -20,35 +20,84 @@ function Profile() {
   if (!user) return <div className="text-center mt-10">Loading...</div>;
 
   return (
-    <div className="max-w-2xl mx-auto mt-10">
-      <h1 className="text-2xl mb-4">Profile</h1>
+    <div className="min-h-screen bg-gray-100 py-10">
+      <div className="max-w-3xl mx-auto px-4 space-y-6">
+        {/* Profile Card */}
+        <div className="bg-white rounded-2xl shadow-md p-6 flex items-center gap-5">
+          {/* Avatar */}
+          <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center text-white text-xl font-bold">
+            {user.name.charAt(0).toUpperCase()}
+          </div>
 
-      <div className="border p-4 rounded mb-4">
-        <h2 className="text-xl font-bold">{user.name}</h2>
-        <p>{user.email}</p>
+          {/* User Info */}
+          <div className="flex-1">
+            <h2 className="text-xl font-bold text-gray-800">{user.name}</h2>
+            <p className="text-gray-500 text-sm">{user.email}</p>
 
-        <div className="mt-3">
-          <span className="mr-4">👥 Followers: {user.followers.length}</span>
-          <span>➡️ Following: {user.following.length}</span>
+            {/* Stats */}
+            <div className="flex gap-6 mt-3 text-sm">
+              <span className="text-gray-700">
+                <strong>{user.followers.length}</strong> Followers
+              </span>
+              <span className="text-gray-700">
+                <strong>{user.following.length}</strong> Following
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Followers Section */}
+        <div className="bg-white rounded-2xl shadow-md p-5">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800">
+            Followers
+          </h3>
+
+          {user.followers.length === 0 ? (
+            <p className="text-gray-500 text-sm">No followers yet</p>
+          ) : (
+            <div className="space-y-3">
+              {user.followers.map((f) => (
+                <div
+                  key={f._id}
+                  className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition"
+                >
+                  <div>
+                    <p className="font-medium text-gray-800">{f.name}</p>
+                    <p className="text-sm text-gray-500">{f.email}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Following Section */}
+        <div className="bg-white rounded-2xl shadow-md p-5">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800">
+            Following
+          </h3>
+
+          {user.following.length === 0 ? (
+            <p className="text-gray-500 text-sm">Not following anyone</p>
+          ) : (
+            <div className="space-y-3">
+              {user.following.map((f) => (
+                <div
+                  key={f._id}
+                  className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition"
+                >
+                  <div>
+                    <p className="font-medium text-gray-800">{f.name}</p>
+                    <p className="text-sm text-gray-500">{f.email}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
-
-      <h3 className="text-lg mb-2">Followers</h3>
-      {user.followers.map((f) => (
-        <div key={f._id} className="border p-2 mb-2 rounded">
-          {f.name} ({f.email})
-        </div>
-      ))}
-
-      <h3 className="text-lg mt-4 mb-2">Following</h3>
-      {user.following.map((f) => (
-        <div key={f._id} className="border p-2 mb-2 rounded">
-          {f.name} ({f.email})
-        </div>
-      ))}
     </div>
   );
 }
-
 
 export default Profile;

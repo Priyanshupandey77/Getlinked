@@ -27,48 +27,72 @@ function Notifications() {
   }, []);
 
   return (
-    <div className="max-w-2xl mx-auto mt-10">
-      <h1 className="text-2xl mb-4">Notifications 🔔</h1>
-
-      {notifications.length === 0 && (
-        <p className="text-gray-500">No notifications yet</p>
-      )}
-
-      {notifications.map((n) => (
-        <div
-          key={n._id}
-          className={`p-3 mb-2 border rounded ${
-            !n.isRead ? "bg-gray-100" : ""
-          }`}
-        >
-          <p>
-            <span className="font-bold">{n.sender.name}</span>{" "}
-            {n.type === "follow" && "followed you"}
-            {n.type === "like" && "liked your post"}
-            {n.type === "comment" && (
-              <>
-                commented:{" "}
-                <span className="italic">
-                  "{n.commentText || "Nice post!"}"
-                </span>
-              </>
-            )}
-          </p>
-
-          {n.post && (
-            <p className="text-sm text-gray-500 mt-1">"{n.post.content}"</p>
-          )}
-
-          <p className="text-xs text-gray-400 mt-2">
-            {new Date() - new Date(n.createdAt) < 86400000
-              ? formatTime(n.createdAt)
-              : new Date(n.createdAt).toLocaleDateString("en-IN", {
-                  day: "numeric",
-                  month: "short",
-                })}
-          </p>
+    <div className="min-h-screen bg-gray-100 py-10">
+      <div className="max-w-2xl mx-auto px-4 space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-gray-800">Notifications 🔔</h1>
+          <span className="text-sm text-gray-500">
+            {notifications.length} total
+          </span>
         </div>
-      ))}
+
+        {/* Empty State */}
+        {notifications.length === 0 && (
+          <div className="text-center bg-white p-8 rounded-2xl shadow text-gray-500">
+            No notifications yet 🚀
+          </div>
+        )}
+
+        {/* Notifications List */}
+        <div className="space-y-4">
+          {notifications.map((n) => (
+            <div
+              key={n._id}
+              className={`flex items-start gap-3 p-4 rounded-2xl shadow-sm bg-white transition hover:shadow-md ${
+                !n.isRead ? "border-l-4 border-blue-500 bg-blue-50" : ""
+              }`}
+            >
+              {/* Avatar */}
+              <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-sm font-bold text-white">
+                {n.sender.name.charAt(0).toUpperCase()}
+              </div>
+
+              {/* Content */}
+              <div className="flex-1">
+                <p className="text-gray-800 text-sm leading-relaxed">
+                  <span className="font-semibold">{n.sender.name}</span>{" "}
+                  {n.type === "follow" && "followed you"}
+                  {n.type === "like" && "liked your post"}
+                  {n.type === "comment" && (
+                    <>
+                      commented:{" "}
+                      <span className="italic text-gray-600">
+                        "{n.commentText || "Nice post!"}"
+                      </span>
+                    </>
+                  )}
+                </p>
+
+                {n.post && (
+                  <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                    "{n.post.content}"
+                  </p>
+                )}
+
+                <p className="text-xs text-gray-400 mt-2">
+                  {new Date() - new Date(n.createdAt) < 86400000
+                    ? formatTime(n.createdAt)
+                    : new Date(n.createdAt).toLocaleDateString("en-IN", {
+                        day: "numeric",
+                        month: "short",
+                      })}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

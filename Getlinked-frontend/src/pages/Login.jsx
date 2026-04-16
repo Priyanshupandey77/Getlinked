@@ -33,19 +33,22 @@ function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300">
       <form
         onSubmit={handleSubmit}
-        className="p-6 bg-white shadow-md rounded w-80"
+        className="bg-white p-8 rounded-2xl shadow-xl w-96 space-y-5"
       >
-        <h2 className="text-xl mb-4">Login</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800">
+          Welcome Back 👋
+        </h2>
+        <p className="text-center text-gray-500 text-sm">Login to continue</p>
 
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Email Address"
           onChange={handleChange}
-          className="w-full mb-3 p-2 border"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
         />
 
         <input
@@ -53,13 +56,21 @@ function Login() {
           name="password"
           placeholder="Password"
           onChange={handleChange}
-          className="w-full mb-3 p-2 border"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
         />
 
-        <button className="w-full bg-blue-500 text-white p-2">Login</button>
+        <button className="w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg font-semibold transition duration-200">
+          Login
+        </button>
 
-        <p>
-          Don't have an account?<Link to="/register">Signup</Link>
+        <p className="text-center text-sm text-gray-600">
+          Don’t have an account?{" "}
+          <Link
+            to="/register"
+            className="text-blue-600 font-medium hover:underline"
+          >
+            Signup
+          </Link>
         </p>
       </form>
     </div>

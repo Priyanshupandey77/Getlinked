@@ -34,38 +34,51 @@ function Register() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-300">
       <form
         onSubmit={handleSubmit}
-        className="p-6 bg-white shadow-md rounded w-80"
+        className="bg-white p-8 rounded-2xl shadow-xl w-96 space-y-4"
       >
-        <h2 className="text-xl mb-4">Register</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800">
+          Create Account
+        </h2>
+        <p className="text-center text-gray-500 text-sm">
+          Join us and get started 🚀
+        </p>
 
         <input
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder="Full Name"
           onChange={handleChange}
-          className="w-full mb-2 p-2 border"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
         />
+
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Email Address"
           onChange={handleChange}
-          className="w-full mb-2 p-2 border"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
         />
+
         <input
           type="password"
           name="password"
           placeholder="Password"
           onChange={handleChange}
-          className="w-full mb-2 p-2 border"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
         />
 
-        <button className="w-full bg-green-500 text-white p-2">Register</button>
-        <p>
-          Already have an account?<Link to="/">Login</Link>
+        <button className="w-full bg-green-500 hover:bg-green-600 text-white p-3 rounded-lg font-semibold transition duration-200">
+          Register
+        </button>
+
+        <p className="text-center text-sm text-gray-600">
+          Already have an account?{" "}
+          <Link to="/" className="text-green-600 font-medium hover:underline">
+            Login
+          </Link>
         </p>
       </form>
     </div>

@@ -21,30 +21,63 @@ function PostCard({ post, fetchFeed }) {
   };
 
   return (
-    <div className="bg-white shadow-sm border rounded p-4 mb-4">
-      <h3 className="font-bold">{post.author.name}</h3>
-      <p>{post.content}</p>
+    <div className="bg-white rounded-2xl shadow-md hover:shadow-lg transition duration-300 border border-gray-100 p-5">
 
-      <div className="text-sm text-gray-500 mt-2">
-        ❤️ {post.likes.length} Likes | 💬 {post.comments.length} Comments
+      {/* Author */}
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-semibold">
+          {post.author.name.charAt(0)}
+        </div>
+        <div>
+          <h3 className="font-semibold text-gray-800">
+            {post.author.name}
+          </h3>
+          <p className="text-xs text-gray-500">Just now</p>
+        </div>
       </div>
-      <button
-        onClick={handleLike}
-        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded"
-      >
-        ❤️ Like
-      </button>
-      <input
-        type="text"
-        placeholder="Write a comment..."
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        className="border rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-      />
 
-      <button onClick={handleComment} className="text-green-500 mt-1">
-        Comment
-      </button>
+      {/* Content */}
+      <p className="text-gray-700 leading-relaxed mb-4">
+        {post.content}
+      </p>
+
+      {/* Stats */}
+      <div className="flex justify-between text-sm text-gray-500 mb-3 border-b pb-2">
+        <span>❤️ {post.likes.length} Likes</span>
+        <span>💬 {post.comments.length} Comments</span>
+      </div>
+
+      {/* Actions */}
+      <div className="flex justify-around text-sm mb-3">
+        <button
+          onClick={handleLike}
+          className="flex items-center gap-1 text-gray-600 hover:text-blue-600 transition"
+        >
+          ❤️ Like
+        </button>
+
+        <button className="flex items-center gap-1 text-gray-600 hover:text-green-600 transition">
+          💬 Comment
+        </button>
+      </div>
+
+      {/* Comment Input */}
+      <div className="flex gap-2">
+        <input
+          type="text"
+          placeholder="Write a comment..."
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          className="flex-1 border rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+
+        <button
+          onClick={handleComment}
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm"
+        >
+          Post
+        </button>
+      </div>
     </div>
   );
 }

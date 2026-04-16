@@ -70,23 +70,34 @@ function Search() {
       {users.map((user) => (
         <div
           key={user._id}
-          className="border p-3 mb-2 rounded flex justify-between"
+          className="flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition"
         >
-          <div>
-            <h3 className="font-bold">{user.name}</h3>
-            <p className="text-sm text-gray-500">{user.email}</p>
+          {/* Left: Avatar + Info */}
+          <div className="flex items-center gap-3">
+            {/* Avatar */}
+            <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-semibold">
+              {user.name.charAt(0).toUpperCase()}
+            </div>
+
+            {/* User Info */}
+            <div>
+              <h3 className="font-semibold text-gray-800">{user.name}</h3>
+              <p className="text-sm text-gray-500">{user.email}</p>
+            </div>
           </div>
+
+          {/* Right: Follow Button */}
           {user.isFollowing ? (
             <button
               onClick={() => handleUnfollow(user._id)}
-              className="bg-gray-500 hover:bg-red-400 text-white px-3 py-1"
+              className="px-4 py-1.5 text-sm font-medium rounded-lg bg-gray-200 text-gray-700 hover:bg-red-500 hover:text-white transition"
             >
               Following
             </button>
           ) : (
             <button
               onClick={() => handleFollow(user._id)}
-              className="bg-blue-500 text-white px-3 py-1"
+              className="px-4 py-1.5 text-sm font-medium rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition"
             >
               Follow
             </button>
