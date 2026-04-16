@@ -73,13 +73,12 @@ function Navbar() {
       },
       { to: "/profile", label: "Profile", icon: "👤" },
     ],
-    [unreadCount]
+    [unreadCount],
   );
 
   return (
     <div className="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b shadow-sm">
       <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between">
-
         {/* Logo */}
         <h1 className="text-2xl font-extrabold text-blue-600 tracking-tight">
           Getlinked
@@ -113,7 +112,6 @@ function Navbar() {
 
         {/* Right */}
         <div className="flex items-center gap-3">
-
           {/* Avatar */}
           <NavLink
             to="/profile"
