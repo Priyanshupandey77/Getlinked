@@ -1,6 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import API from "../api/axios";
+import { FaHome } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
+import { FaBell } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { HiOutlineLogout } from "react-icons/hi";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -10,7 +15,7 @@ function Navbar() {
     navigate("/");
   };
 
-  // ✅ Real user state
+  // Real user state
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -26,7 +31,7 @@ function Navbar() {
     fetchUser();
   }, []);
 
-  // ✅ Initials
+  // Initials
   const initials =
     user?.name
       ?.split(" ")
@@ -35,7 +40,7 @@ function Navbar() {
       .toUpperCase()
       .slice(0, 2) || "U";
 
-  // ✅ Notifications state
+  // Notifications state
   const [notifications, setNotifications] = useState([]);
 
   const fetchNotifications = async () => {
@@ -50,28 +55,28 @@ function Navbar() {
   useEffect(() => {
     fetchNotifications();
 
-    // 🔥 optional: auto refresh every 10 sec
+    //auto refresh every 10 sec
     const interval = setInterval(fetchNotifications, 10000);
     return () => clearInterval(interval);
   }, []);
 
-  // ✅ Correct unread logic
+  // Correct unread logic
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 
   const displayCount = unreadCount > 9 ? "9+" : unreadCount;
 
-  // ✅ Nav items
+  //Nav items
   const navItems = useMemo(
     () => [
-      { to: "/feed", label: "Feed", icon: "🏠" },
-      { to: "/search", label: "Search", icon: "🔍" },
+      { to: "/feed", label: "Feed", icon: <FaHome size={20} /> },
+      { to: "/search", label: "Search", icon: <FaSearch size={20} /> },
       {
         to: "/notifications",
         label: "Notifications",
-        icon: "🔔",
+        icon: <FaBell size={20} />,
         badge: unreadCount,
       },
-      { to: "/profile", label: "Profile", icon: "👤" },
+      { to: "/profile", label: "Profile", icon: <FaUser size={20} /> },
     ],
     [unreadCount],
   );
@@ -125,6 +130,7 @@ function Navbar() {
             onClick={handleLogout}
             className="text-xs sm:text-sm text-red-500 hover:bg-red-500 hover:text-white px-2 sm:px-3 py-1 rounded whitespace-nowrap"
           >
+            <HiOutlineLogout size={20} />
             Logout
           </button>
         </div>
