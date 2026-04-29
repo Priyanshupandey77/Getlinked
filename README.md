@@ -33,7 +33,7 @@ It enables developers to:
 
 * User profiles with dynamic avatars
 * Follow / Unfollow system
-* Real-time UI updates for relationships
+* Real-time UI updates for relationships   
 
 ---
 
